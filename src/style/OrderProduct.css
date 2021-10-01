@@ -1,0 +1,101 @@
+.product-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 90em;
+    box-shadow: 2px 2px 5px 1px lightslategrey;
+    border-radius: 10px;
+    border-top: hidden;
+    border-left: hidden;
+    margin: 20px auto;
+}
+
+.order-item-image img{
+    height: 38vh;
+    width: 25vw;
+}
+
+.order-item-image{
+    justify-self: flex-start;
+}
+
+.order-item-content{
+    height: 25vh;
+    width: 20vw;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 2px 2px 4px 1px grey;
+}
+.order-item-title{
+    background-color: #79d8db;
+    height: 9vh;
+    font-size: 25px;
+    font-family: sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    align-self: flex-start;
+    display: flex;
+    justify-content: center;
+    width:16vw;
+    margin-left: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.order-item-status{
+    height: 12vh;
+    background-color: bisque;
+    margin: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.order-item-price{
+    font-size: 20px;
+}
+.order-item-rate{
+    font-size: 20px;
+}
+
+.order-item-payment{
+    height: 60vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px 1px gray;
+    margin-left: 50px;
+    padding: 50px 10px;
+}
+
+
+.order-item-payment-quantity{
+    height: 30vh;
+    width: 20vw;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+}
+.order-item-payment-quantitys strong{
+    font-size: 20px;
+    align-self: flex-start;
+}
+
+.order-item-payment-quantitys span{
+   align-self: flex-end;
+}
+
+.order-item-button{
+    height: 40px;
+    width: 6vw;
+    margin: 0px 10px;
+    border-radius: 5px;
+    background-color: cornflowerblue;
+}

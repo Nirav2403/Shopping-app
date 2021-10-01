@@ -1,0 +1,129 @@
+export const storeCustomApi = (item, index) => {
+  const quant = item.map((i) => {
+    if (i !== null) {
+      return { ...i, quantity: 1 }
+    }
+  })
+  switch (index) {
+    case 0:
+      localStorage.setItem("Home", JSON.stringify(quant));
+      return {
+        type: "STORE_ALL_DATA",
+        payload: item
+      };
+    case 1:
+      localStorage.setItem("Moblie", JSON.stringify(quant));
+      return {
+        type: "STORE_MOBLIE_DATA",
+        payload: item
+      };
+    case 2:
+      localStorage.setItem("Television", JSON.stringify(quant));
+      return {
+        type: "STORE_TELEVISION_DATA",
+        payload: item
+      };
+    case 3:
+      localStorage.setItem("Laptop", JSON.stringify(quant));
+      return {
+        type: "STORE_LAPTOP_DATA",
+        payload: item
+      };
+    default:
+      return null;
+  }
+}
+
+export const showAllData = (id) => {
+  switch (id) {
+    case 0:
+      return {
+        type: "FETCH_ALL_DATA",
+        payload: JSON.parse(localStorage.getItem("Home"))
+      }
+    case 1:
+      return {
+        type: "FETCH_MOBLIE_DATA",
+        payload: JSON.parse(localStorage.getItem("Moblie"))
+      }
+    case 2:
+      return {
+        type: "FETCH_TELEVISION_DATA",
+        payload: JSON.parse(localStorage.getItem("Television"))
+      }
+    case 3:
+      return {
+        type: "FETCH_LAPTOP_DATA",
+        payload: JSON.parse(localStorage.getItem("Laptop"))
+      }
+    default:
+      return null;
+  }
+}
+
+export const searchProduct = (term) => {
+  return{
+    type: "SEARCH_PRODUCT",
+    payload: term
+  }
+}
+
+export const showOneData = (dataObject, id) => {
+  switch (id) {
+    case "showItem":
+      return {
+        type: "SHOW_ONE_DATA",
+        payload: dataObject
+      }
+    case "addItem":
+      return {
+        type: "ADD_TO_CART",
+        payload: dataObject
+      }
+    case "removeItem":
+      return{
+        type: "REMOVE_TO_CART",
+        payload: dataObject
+      }
+    default:
+      break;
+  }
+}
+
+export const handleCustomerData = (dataObject) =>{
+    return{
+      type: "CUSTOMER_DATA",
+      payload: dataObject
+    }
+}
+
+export const buyItem = (dataObject) =>{
+  return{
+    type: "BUY_ITEM",
+    payload: dataObject
+  }
+}
+
+export const orderItem = (dataObject) => {
+  console.log("orderItem action",dataObject);
+  return{
+    type: "ORDER_ITEM",
+    payload: dataObject
+  }
+}
+
+export const buyAll = (data) => {
+  return{
+    type: "BUY_ALL_REMOVE",
+    payload: data
+  }
+}
+
+export const buyOneRemove = (data) => {
+  return{
+    type: "BUY_ONE_REMOVE",
+    payload: data
+  }
+}
+
+

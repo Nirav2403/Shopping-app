@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Empty from './Empty';
+import NoOrderList from '../style/no-order-icon.jpg';
 
 const OrderList = ({ order, ...props }) => {
-    if(order.length===0){
-        props.history.push("/");
-    }
+    
     const purchaseOrderList = (orderList) => {
         return orderList.map((cards)=>{
             return cards.map((card)=>{
@@ -29,7 +29,7 @@ const OrderList = ({ order, ...props }) => {
     }
     return (
         <div className="order-list-container">
-            {purchaseOrderList(order)}
+            {order.length===0 ? <Empty emptyImage={NoOrderList} emptyContent="No Items. have been Placed as your order"/> : purchaseOrderList(order)}
         </div>
     )
 }

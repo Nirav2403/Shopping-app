@@ -1,32 +1,30 @@
 export const storeJsonData = (state = [], action) => {
     switch (action.type) {
-        case "STORE_ALL_DATA":
-            return action.payload;
-        case "STORE_MOBLIE_DATA":
-            return action.payload;
-        case "STORE_TELEVISION_DATA":
-            return action.payload;
-        case "STORE_LAPTOP_DATA":
-            return action.payload;
+        case "APP_DATA":
+            const newData = action.payload.map((item) => { return { ...item, quantity: 1 } })
+            return newData;
         default:
+            console.log(action.payload)
             return state;
     }
 }
 
 export const fetchStoreData = (state = [], action) => {
+    console.log(action.type)
     switch (action.type) {
-        case "FETCH_ALL_DATA":
-            return action.payload;
-        case "FETCH_MOBLIE_DATA":
-            return action.payload;
-        case "FETCH_TELEVISION_DATA":
-            return action.payload;
-        case "FETCH_LAPTOP_DATA":
-            return action.payload;
+        case "NAVBAR_HOME_DATA":
+            return action.payload
+        case "NAVBAR_MOBLIE_DATA":
+            return action.payload.filter((item)=>item.product_department==="Moblie");
+        case "NAVBAR_TELEVISION_DATA":
+            return action.payload.filter((item)=>item.product_department==="Tv");
+        case "NAVBAR_LAPTOP_DATA":
+            return action.payload.filter((item)=>item.product_department==="Laptop");
         default:
             return state;
     }
 }
+
 
 export const fetchOneData = (state = [], action) => {
     switch (action.type) {
@@ -72,9 +70,9 @@ export const addCartData = (state = [], action) => {
             return state = [];
 
         case "BUY_ONE_REMOVE":
-            const removeOneItem = state.filter((item)=>item.product_name !== action.payload.product_name)
-            
-            return removeOneItem; 
+            const removeOneItem = state.filter((item) => item.product_name !== action.payload.product_name)
+
+            return removeOneItem;
 
         default:
             return state;
@@ -106,10 +104,10 @@ export const buyPurchaseProduct = (state = [], action) => {
 export const orderPurchaseProduct = (state = [], action) => {
     switch (action.type) {
         case "ORDER_ITEM":
-        if (state.find((item) => item.find((i)=>i.product_name === action.payload.product_name))) {
-            return state;
-        }
-        return [...state, action.payload];
+            if (state.find((item) => item.find((i) => i.product_name === action.payload.product_name))) {
+                return state;
+            }
+            return [...state, action.payload];
         default:
             return state;
     }
@@ -118,8 +116,7 @@ export const orderPurchaseProduct = (state = [], action) => {
 export const searchProductName = (state = [], action) => {
     switch (action.type) {
         case "SEARCH_PRODUCT":
-            const allProducts = JSON.parse(localStorage.getItem('Home'))
-            let searching = allProducts.filter((item) => {
+            let searching = action.data.filter((item) => {
                 if (item.product_name.indexOf(action.payload) === -1) {
                     if (item.product_name.toLowerCase().indexOf(action.payload) !== -1) {
                         return item;
@@ -140,4 +137,36 @@ export const searchProductName = (state = [], action) => {
     }
 }
 
+// export const storeJsonData = (state = [], action) => {
+//     switch (action.type) {
+//         case "APP_DATA":
+//             const newData = action.payload.map((item) => { return { ...item, quantity: 1 } })
+//             return newData;
+//         // case "STORE_ALL_DATA":
+//         //     return action.payload;
+//         // case "STORE_MOBLIE_DATA":
+//         //     return action.payload;
+//         // case "STORE_TELEVISION_DATA":
+//         //     return action.payload;
+//         // case "STORE_LAPTOP_DATA":
+//         //     return action.payload;
+//         default:
+//             console.log(action.payload)
+//             return state;
+//     }
+// }
 
+// export const fetchStoreData = (state = [], action) => {
+    //     switch (action.type) {
+    //         case "FETCH_ALL_DATA":
+    //             return action.payload;
+    //         case "FETCH_MOBLIE_DATA":
+    //             return action.payload;
+    //         case "FETCH_TELEVISION_DATA":
+    //             return action.payload;
+    //         case "FETCH_LAPTOP_DATA":
+    //             return action.payload;
+    //         default:
+    //             return state;
+    //     }
+    // }

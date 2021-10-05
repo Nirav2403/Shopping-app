@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Padauk&display=swap');
 :root {
+    --font-nav-li: 'Padauk', sans-serif;
     --font_title: 'IBM Plex Sans KR', sans-serif;
     --font_Price: 'Kalam', cursive;
 }
@@ -11,10 +13,126 @@
     box-sizing: border-box;
 }
 
+/* <-------------Main Section---------------> */
+
+.app-container{
+    display: grid;
+    grid-template-columns: repeat(5, minmax(100px, 5fr));
+    grid-template-rows: 2fr auto;
+    grid-template-areas: "navbar navbar navbar navbar navbar""card-content card-content card-content card-content card-content";
+}
+
+.app-content{
+    grid-area: card-content;
+}
+
 
 /* <-----------Navigation---------------> */
 
-#navBar {
+#navBar{
+    grid-area: navbar;
+    height: min(5rem,8rem);
+    display: grid;
+    grid-template-columns: 1.5fr 4fr 4fr 2.5fr;
+    grid-gap: 1rem;
+    place-items: center;
+    background-color: #FB9300;
+    position: sticky;
+    top: 0;
+}
+
+.nav-logo img{
+    height: 3rem;
+    width: 6rem;
+}
+
+#navUi{
+    padding: 0;
+    margin: 0;
+}
+
+#navUi li{
+    border-radius: 0.3rem;
+    text-align: center;
+    float: left;
+    list-style: none;
+    padding: 0.5rem 2rem;
+    font-family: var(--font-nav-li);
+    font-size: 1.2rem;
+    color: white;
+}
+
+#navUi li:hover{
+    background-color: white;
+    color: black;
+}
+
+#navUi li:hover a{
+    color: black;
+}
+
+.nav-searchbar{
+    display: flex;
+    height: fit-content;
+    margin-top: 0.5rem;
+    place-self: center end;
+}
+
+.nav-searchbar-input input{
+    height: 2rem;
+    width: 15rem;
+    border: none;
+    outline: none;
+}
+
+.nav-searchbar-btn{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background-color: white;
+    margin-left: 1rem;
+}
+
+.right-sided-btn{
+    width: 7rem;
+    height: 2.5rem;
+    background-color: #FFE3E3;
+    border-radius: 0.3rem;
+    border: none;
+    outline: none;
+    margin: 0 1rem;
+    position: relative;
+}
+
+.right-sided-btn i {
+    color: blue;
+    margin-left: 0.3rem;
+}
+
+.right-sided-btn:hover{
+    background-color: #FEF1E6;
+}
+
+.add-to-cart-length{
+    width: 1.5rem;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    top: -15px;
+    right: -10px;
+}
+
+.nav-right-sided-icons{
+    display: none;
+}
+
+.nav-right-sided-icons i{
+    font-size: 1.5rem;
+}
+
+/* #navBar {
     display: flex;
     flex-direction: Row;
     background-color: #0c8081;
@@ -68,12 +186,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 0px 50px;
+    margin: 0px 85px;
 }
 
 .nav-searchbar-input {
     height: 30px;
-    width: 22vw;
+    width: 22em;
     margin: 5px 10px;
 }
 
@@ -106,20 +224,8 @@
 }
 
 
-/* <-------------Main Section---------------> */
 
-.mainContainer {
-    height: fit-content;
-    width: fit-content;
-}
 
-.subContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
 
 
 /* <----------------Product Card Section-------------> */
@@ -288,12 +394,12 @@
 /* <---------------Add Cart-----------------> */
 
 .purchase-card-container {
-    width: 100em;
+    height: max-content;
+    width: 100vw;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: center;
 }
 
 .purchase-card-section {
@@ -383,7 +489,7 @@
 }
 
 .buy-all {
-    width: 79em;
+    width: 58em;
     text-align: right;
     margin: 1em auto;
 }
@@ -729,3 +835,78 @@ a{
     margin-bottom: 5px;
 }
 
+/* <-----------------Media Query---------------------> */
+
+@media screen and (max-width:1650px) {
+    .nav-searchbar-input{
+        width: 15em;
+    }
+}
+@media screen and (min-width:1200px) and (max-width:1650px) {
+    .nav-searchbar{
+        margin: 0 10px;
+    }
+    #navUi li {
+        padding: 1.3em 1.5em;
+    }
+}
+@media screen and (min-width:1000px) and (max-width:1200px) {
+    .nav-searchbar-input{
+        width: 10em;
+    }
+    .nav-searchbar{
+        margin: 0 10px;
+    }
+    
+    #navUi li {
+        padding: 1.3em 1em;
+    }
+    #navUi {
+        padding-left: 0;
+    }
+    .right-sided-btn{
+        margin-right: 0;
+    }
+}
+@media screen and (min-width:800px) and (max-width:1000px) {
+    .nav-searchbar{
+        display: none;
+    }
+    #navUi li {
+        padding: 1.3em 1em;
+    }
+    #navUi {
+        padding-left: 0;
+    }
+}
+@media screen and (min-width:400px) and (max-width:800px) {
+    .nav-searchbar{
+        display: none;
+    }
+    #navUi li {
+        padding: 1.3em 1em;
+    }
+    #navUi {
+        padding-left: 0;
+    }
+    .right-sided-btn{
+       display: none;
+    }
+    .add-to-cart-length{
+        display: none;
+    }
+}
+@media screen and (max-width:400px) {
+    .nav-searchbar{
+        display: none;
+    }
+    #navUi {
+        display: none;
+    }
+    .right-sided-btn{
+       display: none;
+    }
+    .add-to-cart-length{
+        display: none;
+    }
+}

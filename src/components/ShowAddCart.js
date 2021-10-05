@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { showOneData, buyItem, buyOneRemove, buyAll } from '../actions/custonAction';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import Empty from './Empty';
+import NoAddCart from '../style/no-shopping-cart.jpg';
 
 const ShowAddCart = ({ addcart, showOneData, buyItem, buyOneRemove, buyAll, ...props }) => {
-    if(addcart.length===0){
-        props.history.push("/")
-    }
+    
     const removeData = (card) => {
         const remove = {...card,quantity:0}
         console.log(remove);
@@ -42,7 +42,7 @@ const ShowAddCart = ({ addcart, showOneData, buyItem, buyOneRemove, buyAll, ...p
     return (
         <>
             <div className="purchase-card-container">
-                {purchaseCard()}
+                {addcart.length===0? <Empty emptyImage={NoAddCart} emptyContent="No Item have been added to cart"/> : purchaseCard()}
                 {(addcart.length<2) ? null : <Link to="/buy"><div className="buy-all"><button className="buy-all-btn" onClick={()=>{buyItem(addcart);buyAll(addcart)}} >Buy all <i className="fas fa-shopping-cart" style={{color:"blue",marginLeft:"3px"}}></i></button></div></Link>}
             </div>
 

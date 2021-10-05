@@ -1,0 +1,26 @@
+*,*::after,*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.empty-container{
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
+}
+
+.empty-image{
+    display: block;
+    height: 12rem;
+    width: 15rem;
+    margin: 2rem auto;
+}
+
+.empty-content{
+    text-align: center;
+}

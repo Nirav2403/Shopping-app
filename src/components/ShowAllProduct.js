@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import { showOneData } from '../actions/custonAction';
 import ShowOneProduct from './ShowOneProduct';
+import Loader from './Loader';
 
 const Product = ({ cards, showOneData }) => {
     const [showProduct, setShowProduct] = useState(false);
@@ -32,7 +33,7 @@ const Product = ({ cards, showOneData }) => {
     return (
         <>
             <div className="card-container">
-                {showProducts(cards)}
+                {cards===null?<Loader/>:showProducts(cards)}
             </div>
         </>
     )

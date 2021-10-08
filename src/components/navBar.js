@@ -4,12 +4,15 @@ import { showAllData, searchProduct } from '../actions/custonAction';
 import { Link } from "react-router-dom";
 import '../App.css';
 import logo from '../style/logo.jpg';
+import DropdownMenu from './DropdownMenu';
 
 const Navigation = ({ showAllData, searchProduct, order, addcart, navbar }) => {
     const [term, setTerm] = useState("");
+    const [showListMenu, setShowListMenu] = useState(false)
     useEffect(() => {
         showAllData(navbar, "HOME");
     }, [])
+    
     return (
         <>
             <nav id="navBar">
@@ -27,10 +30,14 @@ const Navigation = ({ showAllData, searchProduct, order, addcart, navbar }) => {
                     <li>
                         <Link to="/laptop" onClick={() => showAllData(navbar, "LAPTOP")}>Laptop</Link>
                     </li>
+                    <i className="fas fa-list" id="list-icon" onClick={() => { setShowListMenu(!showListMenu); console.log(showListMenu) }}></i>
                 </ul>
-                <div className="nav-searchbar">
-                    <div className="nav-searchbar-input"><Link to="search"><input type="search" value={term} onChange={(e) => { setTerm(e.target.value); searchProduct(e.target.value, navbar) }} /></Link></div>
-                    <button type="button" className="nav-searchbar-btn" onClick={() => searchProduct(term, navbar)}><i className="fa fa-search"></i></button>
+                <div className="search-area">
+                    <div className="nav-searchbar">
+                        <div className="nav-searchbar-input"><Link to="search"><input type="search" value={term} onChange={(e) => { setTerm(e.target.value); searchProduct(e.target.value, navbar) }} /></Link></div>
+                        <button type="button" className="nav-searchbar-btn" onClick={() => searchProduct(term, navbar)}><i className="fa fa-search"></i></button>
+                    </div>
+                    <Link to="/search"><i className="fa fa-search" id="search-icon-btn"   ></i></Link>
                 </div>
                 <div className="icon-section">
                     <div className="nav-right-sided-btn">
@@ -38,13 +45,19 @@ const Navigation = ({ showAllData, searchProduct, order, addcart, navbar }) => {
                         <Link to="/order-list"> <button className="right-sided-btn">My Order <i className="fas fa-shopping-bag" ></i><div className="add-to-cart-length">&nbsp;{order.length}&nbsp;</div></button></Link>
                     </div>
                     <div className="nav-right-sided-icons">
-                        <Link to="/add-cart-list"><i className="fas fa-bookmark" style={{ color: "blue" }}></i><div className="add-to-cart-length">&nbsp;{addcart.length}&nbsp;</div></Link>
-                        <Link to="/order-list"><i className="fas fa-shopping-bag" style={{ color: "blue" }}></i><div className="add-to-cart-length">&nbsp;{order.length}&nbsp;</div></Link>
+                        <Link to="/add-cart-list"><i className="fas fa-bookmark" ></i><div>&nbsp;{addcart.length}&nbsp;</div></Link>
+                        <Link to="/order-list"><i className="fas fa-shopping-bag" ></i><div>&nbsp;{order.length}&nbsp;</div></Link>
                     </div>
                 </div>
             </nav>
+            {showListMenu ? <DropdownMenu dropdown={showListMenu} setDropdown={setShowListMenu} /> : null}
         </>
     )
+}
+
+const mapDispatchToProps = {
+    showAllData,
+    searchProduct
 }
 
 const mapStateToProps = (state) => {
@@ -55,4 +68,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { showAllData, searchProduct })(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

@@ -1,4 +1,5 @@
 export const storeCustomApi = (item) => {
+  console.log(item);
   return {
     type: "APP_DATA",
     payload: item

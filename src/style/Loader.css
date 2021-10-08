@@ -7,8 +7,8 @@
 }
 
 .loader-container{
-    height: inherit;
-    width: inherit;
+    height: 80vh;
+    width: 100vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,38 +32,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: square 40s linear 0s infinite reverse;
-
+    /* transform: rotate(77.5deg); */
+    animation: square 60s linear 0s reverse infinite  ;
 }
 
 @keyframes square {
-    0%{
-        transform: rotate(0deg);
-    }
-    12.5%{
-        transform: rotate(45deg);
-    }
-    25%{
-        transform: rotate(90deg);
-    }
-    37.5%{
-        transform: rotate(135deg);
-    }
-    50%{
-        transform: rotate(180deg);
-    }
-    62.5%{
-        transform: rotate(225deg);
-    }
-    75%{
-        transform: rotate(270deg);
-    }
-    87.5%{
-        transform: rotate(315deg);
-    }
-    100%{
-        transform: rotate(360deg);
-    }
+    to{transform: rotate(1turn)}
 }
 
 .loader-circle{
@@ -72,20 +46,44 @@
     border: 2px solid black;
     background-color: blue;
     border-radius: 50%;
-    animation: circle 10s linear 0s infinite alternate-reverse;
-    /* transform: translate(30px,-71px); */
+    animation: circle 15s linear 0s infinite alternate-reverse;
+    transform: translate(72px,-72px);;
 }
+
+/*transform: rotate(45deg)  transform: translate(75px,-92px); */
+/* transform: rotate(-50deg)  transform: translate(81px,-86px); */
+/* transform: rotate(-55deg) transform: translate(90px,-75px); */
+/* transform: rotate(-60deg) transform: translate(92px,-72px); */
 
 @keyframes circle {
     0%{
-        transform: translate(30px,-71px);
+        transform: translate(72px,-72px);
     }
-    60%{
-        transform: translate(72px,-91px);
+    /* 10%{
+        transform: translate(81px,-86px);
+    }
+    20%{
+        transform: translate(90px,-75px);
+    } */
+    25%{
+        transform: translate(83px,-74px);
+    }
+    /* 30%{
+        transform: translate(92px,-72px);
+    }
+    40%{
+        transform: translate();
+    } */
+    50%{
+        transform: translate(75px,-92px);
+    }
+    75%{
+        transform: translate(65px,-75px);
     }
     100%{
-        transform: translate(30px,-71px);
+        transform: translate(72px,-72px);
     }
+    
 }
 
 #gear-icon{

@@ -41,7 +41,7 @@ const ShowAddCart = ({ addcart, showOneData, buyItem, buyOneRemove, buyAll, ...p
         <>
             <div className="purchase-card-container">
                 {addcart.length === 0 ? <Empty emptyImage={NoAddCart} emptyContent="No Item have been added to cart" /> : purchaseCard()}
-                {(addcart.length < 2) ? null : <Link to="/buy"><div className="buy-all"><button className="buy-all-btn" onClick={() => { buyItem(addcart); buyAll(addcart) }} >Buy all <i className="fas fa-shopping-cart" style={{ color: "blue", marginLeft: "3px" }}></i></button></div></Link>}
+                {(addcart.length < 2) ? null : <div className="buy-all"><button className="buy-all-btn" onClick={() => { buyItem(addcart); buyAll(addcart); props.history.push("/buy") }} >Checkout all <i className="fas fa-shopping-cart" style={{ color: "blue", marginLeft: "3px" }}></i></button></div>}
             </div>
 
         </>

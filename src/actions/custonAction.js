@@ -1,3 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
+
 export const storeCustomApi = (item) => {
   console.log(item);
   return {
@@ -57,11 +60,17 @@ export const buyItem = (dataObject) =>{
   }
 }
 
-export const orderItem = (dataObject) => {
-  console.log("orderItem action",dataObject);
+export const orderItem = (product,totalProductCost,totalBillCost) => {
+  console.log("==============>>>>>",totalProductCost,totalBillCost);
   return{
     type: "ORDER_ITEM",
-    payload: dataObject
+    payload: {
+      products: product,
+      totalProductCost: totalProductCost,
+      totalBillCost: totalBillCost,
+      orderId: uuidv4(),
+      orderTime: moment().format('LLLL')
+    }
   }
 }
 

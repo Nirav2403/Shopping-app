@@ -102,11 +102,12 @@ export const buyPurchaseProduct = (state = [], action) => {
 }
 
 export const orderPurchaseProduct = (state = [], action) => {
+    console.log("=================>>+++++++++++",action.payload)
     switch (action.type) {
         case "ORDER_ITEM":
-            if (state.find((item) => item.find((i) => i.product_name === action.payload.product_name))) {
-                return state;
-            }
+            // if (state.find((item) => item.find((i) => i.product_name === action.payload.product_name))) {
+            //     return state;
+            // }
             return [...state, action.payload];
         default:
             return state;

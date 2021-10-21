@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { showOneData } from '../actions/custonAction';
+import { showOneData,buyItem,buyOneRemove } from '../actions/custonAction';
 
-const ShowOneProduct = ({ card, setShowProduct, showOneData, ...props }) => {
+const ShowOneProduct = ({ card, setShowProduct, showOneData, buyItem, buyOneRemove, ...props }) => {
     return (
         <>
             <div className="maincontainer">
@@ -18,14 +18,18 @@ const ShowOneProduct = ({ card, setShowProduct, showOneData, ...props }) => {
                         </div>
                     </div>
                 </div>
-                <div className="btn-group">
+                <div className="cards-btn">
                     <button className="card-btn" type="button"><a href={card.info}>Info</a></button>
-                    <Link to="/add-cart-list"><button className="card-btn" type="button" onClick={() => { showOneData(card, "addItem") }}>Add Cart</button></Link>
-                    <Link to="/buy"><button className="card-btn" type="button">Buy now</button></Link>
+                    <button className="card-btn" type="button" onClick={() => { showOneData(card, "addItem"); props.history.push("add-cart-list") }}>Add Cart</button>
+                    <button className="card-btn" type="button" onClick={()=> {buyItem(card); buyOneRemove(card);props.history.push("/buy")}}>Buy now</button>
                 </div>
             </div>
         </>
     )
+}
+
+const mapDispatchToProps = {
+    showOneData, buyItem, buyOneRemove
 }
 
 const mapStateToProps = (state) => {
@@ -35,4 +39,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,{showOneData})(ShowOneProduct)
+export default connect(mapStateToProps,mapDispatchToProps)(ShowOneProduct)

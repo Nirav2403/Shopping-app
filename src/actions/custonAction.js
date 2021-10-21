@@ -68,8 +68,8 @@ export const orderItem = (product,totalProductCost,totalBillCost) => {
       products: product,
       totalProductCost: totalProductCost,
       totalBillCost: totalBillCost,
-      orderId: uuidv4(),
-      orderTime: moment().format('LLLL')
+      orderId: uuidv4().slice(0,12),
+      orderTime: moment().format('LL')
     }
   }
 }

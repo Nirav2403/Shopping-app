@@ -65,7 +65,7 @@ const Moblie = [
                 "product_departmentId": "gadgets",
                 "product_stock": 30,
                 "product_color": "Blue",
-                "product_price": 267,
+                "product_price": 26700,
                 "product_material": "Metal",
                 "product_ratings": 4,
                 "product_sales": 901,
@@ -102,7 +102,7 @@ const Moblie = [
                 "info": "https://www.reliancedigital.in/redmi-k20-pro-smart-phone-256-gb-8-gb-ram-carbon-black/p/491584259"
             },
             {
-                "product_image": "https://dummyproducts-api.herokuapp.com/gadgets/mobilephone_150.png",
+                "product_image": "https://www.reliancedigital.in/medias/OnePlus-9R-Smart-Phone-491996478-i-1-1200Wx1200H?context=bWFzdGVyfGltYWdlc3wyMDQwODd8aW1hZ2UvanBlZ3xpbWFnZXMvaDI2L2g0My85NTQwNzIyNDI1ODg2LmpwZ3xjMTdmNDc2NzA3NTFjNjUyNDFmN2Q2NGM3YmI5NDU5NjJmZmUyZDE4NDNhOGZlZjEzMmI2NWMwYTE3NTI5ODc5",
                 "id": "7",
                 "product_name": "OnePlus 9R",
                 "product_type": "Mobile Phone",

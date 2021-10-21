@@ -2,21 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Empty from './Empty';
 import NoOrderList from '../style/no-order-icon.jpg';
-import { buyPurchaseProduct } from '../reducers/customReducer';
 
 const OrderList = ({ order, ...props }) => {
 
     const purchaseProduct = (card) => {
-        return card.map((product)=>{
-            console.log(product)
+        return card.products.map((product,index)=>{
             return(
                 <div className="product-card">
                     <img src={product.product_image} alt="" />
                     <div className="order-product-content">
                         <h4>{product.product_name}</h4>
-                        <h4>Rate:</h4><span>{product.product_ratings}</span>
-                        <h4>Total Price:</h4><span>{product.product_price}</span>
-                        <h4>Quantity:</h4><span>{product.quantity}</span>
+                        <h6>Rate:</h6><span>{product.product_ratings}<i className='fas fa-star' style={{ color: "#FFA900",marginLeft:"0.3rem" }}></i></span>
+                        <h6>Price:</h6><span><i className="fas fa-rupee-sign" style={{ color: "#161616",marginRight:"0.3rem" }}></i>{product.product_price}</span>
+                        <h6>Quantity:</h6><span>{product.quantity}</span>
+                    </div>
+                    <div className="total-product-cost">
+                        <h4>Total Price</h4><span>{card.totalProductCost[index]}</span>
                     </div>
                 </div>
             )
@@ -29,14 +30,15 @@ const OrderList = ({ order, ...props }) => {
             return(
                 <div className="deal-container">
                     <div className="deal-details">
-                        <h6>{item.orderTime}</h6>
+                        <p><h6>Order Date</h6><span>{item.orderTime}</span></p>
                         <p><h6>Order Id</h6><span>{item.orderId}</span></p>
                         <p><h6>Products</h6><span>{item.products.length}</span></p>
                         <p><h6>Total Cost</h6><span>{item.totalBillCost}</span></p>
                     </div>
                     <div className="product-item-container">
-                        {purchaseProduct(item.products)}
+                        {purchaseProduct(item)}
                     </div>
+                    <div className="back-btn"><button onClick={()=>props.history.push("/")}>Continuous Shopping</button></div>
                 </div>
             )
         })

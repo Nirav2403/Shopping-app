@@ -10,6 +10,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text&family=EB+Garamond&family=Slabo+27px&family=Yanone+Kaffeesatz&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text&family=EB+Garamond&family=Signika+Negative&family=Slabo+27px&family=Yanone+Kaffeesatz&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta&family=Slabo+27px&display=swap');
 :root {
     --font-nav-li: 'Padauk', sans-serif;
     --font_title: 'IBM Plex Sans KR', sans-serif;
@@ -23,6 +25,8 @@
     --font-table-body: 'Crimson Text', serif;
     --font-bill-table-head:  'Crimson Text', serif;
     --font-bill-table-body: 'Source Sans Pro', sans-serif;
+    --font-order-title: 'Mukta', sans-serif;
+    --font-order-subtitle: 'Slabo 27px', serif;
 }
 
 * {
@@ -123,6 +127,8 @@ a{
     width: 15rem;
     border: none;
     outline: none;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
 }
 
 .nav-searchbar-btn{
@@ -877,6 +883,7 @@ a{
 }
 
 .product-section{
+    width: 90%;
     display: grid;
     grid-template-columns: 2fr 8fr;
     grid-gap: 0.5rem;
@@ -1218,27 +1225,45 @@ a{
 /* <------------------order list-----------------> */
 
 .order-list-container{
-    height: 90vh;
+    height: 90%;
     width: 100vw;
 }
 
 .deal-container{
     height: max-content;
     width: 70%;
-    margin: 1rem auto;
-    border: 2px solid red;
+    margin: 2rem auto;
+    box-shadow: #B42B51 0px 3px 8px;
+    border: 2px solid #c71b4b ;
+    display: grid;
+    grid-template-columns: auto;
+    place-items: center;
+    padding-bottom: 2rem;
 }
 
 .deal-details{
+    width: 100%;
     display: grid;
     grid-template-columns: 2.5fr 3fr 1fr 2fr;
     place-items: center;
     background-color: #B42B51;
     color: White;
     padding: 0.5rem 0;
+    grid-gap: 1rem;
+}
+
+.deal-details p{
+   text-align: center;
+    margin: 0;
+}
+.deal-details p h6{
+   text-align: center;
+    margin-bottom: 0.3rem;
+    font-weight: 600
 }
 
 .product-item-container{
+    width: 82%;
     display: grid;
     grid-template-columns: auto;
     place-items: start center;
@@ -1246,13 +1271,70 @@ a{
 }
 
 .product-card{
+    width: 100%;
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 1.5fr 4fr 1.5fr;
+    place-items: center;
+    margin: 1rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 1rem;
+    grid-gap: 0.5rem;
 }
 
 .product-card img{
-    height: 5rem;
-    width: 5rem;
+    height: 8rem;
+    width: 8rem;
+}
+
+.order-product-content{
+    place-self: center start;
+    display: grid;
+    grid-template-columns: 0.1fr 3fr;
+    grid-gap: 0.3rem;
+    place-items: center start;
+}
+
+.order-product-content h4{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    font-family: var(--font-order-title);
+    font-size: 20px;
+    margin: 0;
+    
+}
+
+.order-product-content h6{
+    font-family: var(--font-order-subtitle);
+    font-weight: 600;
+    margin: 0;
+}
+
+.order-product-content span{
+    font-family: var(--font_Price);
+    font-weight: 500;
+    margin: 0;
+}
+
+.total-product-cost{
+    font-family: var(--font_title);
+    font-size: 16px;
+    text-align: center;
+    padding: 0.8rem;
+    background-color: #FFEF78;
+}
+
+.back-btn{
+    width: 80%;
+}
+
+.back-btn button{
+    padding: 0.8rem;
+    border: none;
+    outline: none;
+    border-radius: 0.3rem;
+    font-weight: 900;
+    background-color: #7C83FD;
+    color: white;
 }
 
 /* <------------------search product----------------> */
@@ -1521,7 +1603,9 @@ a{
     .form-layout{
         width: 65%;
     }
-    
+    .deal-container{
+        width: 88%;
+    }
 }
 @media screen and (min-width:800px) and (max-width:1200px) {
     #navBar{
@@ -1550,6 +1634,9 @@ a{
     }
     .form-layout{
         width: 70%;
+    }
+    .deal-container{
+        width: 95%;
     }
 }
 
@@ -1583,6 +1670,19 @@ a{
     .extra-description-section {
         padding: 2.5rem 1rem;
     }
+    .product-card{
+        grid-template-columns: auto;
+        place-items: center;
+    }
+    .order-product-content {
+        place-self: center;
+    }
+    .order-product-content{
+        width: 60%;
+    }
+    /* .order-product-content h4{
+        text-align: center;
+    } */
 }
 @media screen and (min-width:400px) and (max-width:600px){
     .form-layout{
@@ -1701,6 +1801,16 @@ a{
     }
     .extra-description-section{
         display: none;
+    }
+    .product-card{
+        grid-template-columns: auto;
+        place-items: center;
+    }
+    .order-product-content {
+        place-self: center;
+    }
+    .order-product-content{
+        width: 60%;
     }
 }
 

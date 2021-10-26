@@ -12,6 +12,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mukta&family=Slabo+27px&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Old+Mincho&display=swap');
 :root {
     --font-nav-li: 'Padauk', sans-serif;
     --font_title: 'IBM Plex Sans KR', sans-serif;
@@ -27,6 +28,7 @@
     --font-bill-table-body: 'Source Sans Pro', sans-serif;
     --font-order-title: 'Mukta', sans-serif;
     --font-order-subtitle: 'Slabo 27px', serif;
+    --font-input: 'Zen Old Mincho', serif;
 }
 
 * {
@@ -34,6 +36,14 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body{
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+  }
 
 /* <-------------Main Section---------------> */
 
@@ -162,8 +172,9 @@ a{
 }
 
 .right-sided-btn i {
-    color: blue;
-    margin-left: 0.3rem;
+    /* color: blue; */
+    color: #FB9300;
+    
 }
 
 .right-sided-btn:hover{
@@ -185,6 +196,7 @@ a{
 
 .nav-right-sided-icons i{
     color: blue;
+    font-size: 1.5rem;
 }
 
 .nav-right-sided-icons div{
@@ -196,10 +208,6 @@ a{
     position: relative;
    top: -25px;
    right: 10px;
-}
-
-.nav-right-sided-icons i{
-    font-size: 1.5rem;
 }
 
 .dropdown-container{
@@ -355,6 +363,10 @@ a{
     grid-template-columns: auto;
     grid-template-rows: 2fr 1.3fr 0.1fr 0.1fr 1fr;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;    
+}
+
+.cards-section:hover{
+    transform: scale(1.03);
 }
 
 .cards-title{
@@ -1233,8 +1245,8 @@ a{
     height: max-content;
     width: 70%;
     margin: 2rem auto;
-    box-shadow: #B42B51 0px 3px 8px;
-    border: 2px solid #c71b4b ;
+    box-shadow: #FF7600 0px 0.0625em 0.0625em, #FF7600 0px 0.125em 0.5em, #FF7600 0px 0px 0px 1px inset;
+    border: 2px solid #FF7600 ;
     display: grid;
     grid-template-columns: auto;
     place-items: center;
@@ -1246,7 +1258,7 @@ a{
     display: grid;
     grid-template-columns: 2.5fr 3fr 1fr 2fr;
     place-items: center;
-    background-color: #B42B51;
+    background-color: #FB9300;
     color: White;
     padding: 0.5rem 0;
     grid-gap: 1rem;
@@ -1339,12 +1351,15 @@ a{
 
 /* <------------------search product----------------> */
 
-.search-main-container{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+.search-container{
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(5,2fr);
+    grid-gap: 2rem;
+    place-items: center;
+    margin-inline: auto;
+    padding: 1rem;
+    display: grid;
 }
 
 /* <------------------customer form-----------------> */
@@ -1357,7 +1372,7 @@ a{
 }
 
 .form-layout{
-    height: 60%;
+    height: 70%;
     width: 60%;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1405,30 +1420,71 @@ a{
     margin: 0;
 }
 
-.purchaseform-person-field input{
+.field-container{
+    position: relative;
+    margin: 1rem 0;
+    z-index: 0;
+}
+
+.field-container-input{
     width: 100%;
     border: none;
     outline: none;
-    background: transparent;
+    background: transparent ;
     border-bottom: 2px solid grey;
     color: white;
-    margin-bottom: 1rem;
-}
-::placeholder{
-    display: none;
-    color: white;
+    /* margin-bottom: 1rem; */
+    padding: 0.5rem 1rem;
+    z-index: 1;
+    font-family: var(--font-input);
 }
 
-.purchaseform-person-field label{
-    display: none;
-    color: #916BBF;
-    margin-top: 0.3rem;
+.field-container-input:not(:focus).field-container-input:not(:placeholder-shown), .field-container-input:focus{
+    border: 2px solid #113CFC;
+    margin-bottom: 0;
+    border-radius: 0.5rem;
+    height: 3rem;
+    box-shadow: #485fc5 0px 1px 3px;
+}
+
+/* .field-container-input:not(:focus) ~ .validation{
+    display: block;
+} */
+
+/* .field-container-input:focus ~ label, .field-container-input:-webkit-autofill ~ .field-container-label{
+    top: -0.5rem;
     font-size: 0.8rem;
+    color: red;
+} */
+
+.field-container-input:focus ~ .field-container-label, .field-container-input:not(:focus).field-container-input:not(:placeholder-shown)  ~ .field-container-label{
+    top: -0.7rem;
+    font-size: 1rem;
+    color: #A2D2FF;
+}
+
+
+  
+
+.field-container-label{
+    text-align: center;
+    padding: 0 0.3rem;
+    background-color: #272a32;
+    display: block;
+    color: #916BBF;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.3rem;
+    font-family: var(--font-table-body);
+    transition: top 200ms ease-in,
+            left 200ms ease-in,
+            font-size 200ms ease-in;
 }
 
 .validation{
-    display: none;
-    color: red;
+    display: block;
+    color: rgb(13, 163, 38);
     font-size: 14px;
 }
 
@@ -1485,6 +1541,26 @@ a{
     padding: 0.5rem 0.6rem;
     /* border: 1px solid; */
     border-radius: 50%;
+}
+
+.form-btns{
+    place-self: center ;
+}
+.form-btns button{
+    text-align: center;
+    width: 8rem;
+    margin: 0 1rem;
+    padding: 0.5rem 0;
+    border: none;
+    outline: none;
+    font-weight: 800;
+    border-radius: 0.5rem;
+    font-size: 16px;
+}
+
+.form-btns button:not(:disabled):hover, .next-btn:not(:disabled):hover{
+    background-color: #4d4fc8;
+    color: white;
 }
 /* 
 .form-main-container{
@@ -1605,6 +1681,9 @@ a{
     }
     .deal-container{
         width: 88%;
+    }
+    .search-container{
+        grid-template-columns: repeat(4,1fr);
     }
 }
 @media screen and (min-width:800px) and (max-width:1200px) {

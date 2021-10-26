@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { orderItem, buyAll } from '../actions/custonAction';
+import { orderItem, buyAll, buyOneRemove } from '../actions/custonAction';
 import '../App.css';
 
-const OrderProduct = ({ buy, customer, orderItem, ...props }) => {
+const OrderProduct = ({ buy, customer, orderItem, buyOneRemove, ...props }) => {
     const quantityArray = buy.map((item) => item.quantity * item.product_price)
     const totalCost = quantityArray.reduce((sum, cur) => sum + cur, 0);
     const orderList = (Product) => {
@@ -43,6 +42,15 @@ const OrderProduct = ({ buy, customer, orderItem, ...props }) => {
                 //     <div className="order-product-quantity-body">{buy.quantity}</div>
                 // </div>
             )
+        })
+    }
+    const handleOrder = () => {
+        orderItem(buy,quantityArray,totalCost); 
+        props.history.push("/order-list");
+
+        buy.map((item)=>{
+            buyOneRemove(item)
+            buyAll(item)
         })
     }
     return (
@@ -84,7 +92,8 @@ const OrderProduct = ({ buy, customer, orderItem, ...props }) => {
                                 <div className="order-product-total-section">
                                     <h6>Total Price :</h6><span><i className="fas fa-rupee-sign"></i>{totalCost}</span>
                                     <h6>Payment Mode :</h6><span>Cash on delivery</span>
-                                    <p></p><button className="place-order-btn" type="button" onClick={() => { orderItem(buy,quantityArray,totalCost); props.history.push("/order-list") }}>PLACE  ORDER <i className="fas fa-paper-plane"></i></button>
+                                    <button type="button" onClick={()=>props.history.push("/add-cart-list")}>Cancel</button>
+                                    <button className="place-order-btn" type="button" onClick={() => {handleOrder()}}>PLACE  ORDER <i className="fas fa-paper-plane"></i></button>
                                 </div>
                                 {/* <div className="order-product-total-section">
                                     <div className="order-total-price"><div className="order-total-title">Total Price :</div><div className="order-total-value"><i className="fas fa-rupee-sign"></i><h4 style={{ display: "inline-block", marginLeft: "0.5em" }}>{totalCost}</h4></div></div>
@@ -115,6 +124,12 @@ const OrderProduct = ({ buy, customer, orderItem, ...props }) => {
     )
 }
 
+const mapDispatchToProps = {
+    orderItem,
+    buyAll,
+    buyOneRemove
+}
+
 const mapStateToProps = (state) => {
     console.log(state.buy)
     return {
@@ -123,4 +138,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { orderItem, buyAll })(OrderProduct);
+export default connect(mapStateToProps,mapDispatchToProps)(OrderProduct);

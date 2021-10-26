@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import CustomJson from "./components/CustomJson";
 import Navigation from "./components/navBar";
 import { storeCustomApi } from "./actions/custonAction";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -11,7 +10,6 @@ import BuyProduct from "./components/BuyProduct";
 import OrderProduct from "./components/OrderProduct";
 import SearchProduct from "./components/SearchProduct";
 import ShowOneProduct from "./components/ShowOneProduct";
-import Loader from "./components/Loader";
 import { jsonData } from "./components/JsonData";
 
 function App({ storeCustomApi }) {

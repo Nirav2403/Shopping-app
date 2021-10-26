@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { handleCustomerData } from '../actions/custonAction';
-import darkImage from '../style/dark-theme.webp';
 
 const emailValidator =
     /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
 const BuyProduct = ({ handleCustomerData, ...props }) => {
-    console.log(props);
     const [toggleFormPage, setToggleFormPage] = useState(false)
     const [customerData, setCustomerData] = useState({
         name: "",
@@ -30,28 +28,63 @@ const BuyProduct = ({ handleCustomerData, ...props }) => {
         addressErr: ""
     })
 
+    const [disableBtn, setDisableBtn] = useState({
+        nextBtn: true,
+        submitBtn: true
+    })
+
+    useEffect(() => {
+        const fieldValue = Object.values(customerData).map((k)=>{
+            if(k===""){
+                return true
+            }return false
+        });
+        const errorValue = Object.values(inputValidation).map((k)=>{
+            if(k===""){
+                return true
+            }return false
+        })
+        console.log(Object.values(inputValidation).includes(""))
+
+        if(fieldValue.slice(0,3).includes(true) || errorValue.includes(false)){
+            setDisableBtn({...disableBtn,nextBtn:true})
+        }else{
+            if(fieldValue.includes(true) ||  errorValue.includes(false)){
+                setDisableBtn({...disableBtn,nextBtn:false,submitBtn:true})
+                console.log("if",{...disableBtn,nextBtn:false,submitBtn:true})
+            }else{
+                setDisableBtn({...disableBtn,nextBtn:false,submitBtn:false})
+                console.log("else",{...disableBtn,nextBtn:false,submitBtn:false})
+            }
+        }
+    }, [customerData])
+
     const changeData = (e) => {
         const { name, value } = e.target;
         if (name === "name") {
-            if (!customerData.name.length === "") {
+            if (value === "") {
                 setinputValidation({ ...inputValidation, nameErr: "please! fill up the field" });
-            } else if (customerData.name.length < 5 && customerData.name.value !== null) {
+            } else if (customerData.name.length < 5 ) {
                 setinputValidation({ ...inputValidation, nameErr: "name must be upto 5 character" });
             }
             else {
                 setinputValidation({ ...inputValidation, nameErr: "" });
             }
         } else if (name === "email") {
-            if (!emailValidator.test(customerData.email)) {
+            if (value === "") {
+                setinputValidation({ ...inputValidation, emailErr: "please! fill up the field" });
+            }else if (!emailValidator.test(customerData.email)) {
                 setinputValidation({ ...inputValidation, emailErr: "email is not valid" });
             } else {
                 setinputValidation({ ...inputValidation, emailErr: "" });
             }
         } else if (name === "moblieNumber") {
-            if (typeof (customerData.moblieNumber) !== "number" && customerData.moblieNumber === null) {
+            if (value === "") {
+                setinputValidation({ ...inputValidation, moblieNumberErr: "please! fill up the field" });
+            }else if (isNaN(Number(value))===true) {
                 setinputValidation({ ...inputValidation, moblieNumberErr: "number is not valid" });
             } else if (customerData.moblieNumber.length !== 9) {
-                setinputValidation({ ...inputValidation, moblieNumberErr: "number must be 10 length" });
+                setinputValidation({ ...inputValidation, moblieNumberErr: "number must be 10 length"});
             } else {
                 setinputValidation({ ...inputValidation, moblieNumberErr: "" });
             }
@@ -80,17 +113,26 @@ const BuyProduct = ({ handleCustomerData, ...props }) => {
             <div className="form-first-page">
                 <h6 className="form-title">Person Details</h6>
                 <div className="purchaseform-person-field">
-                    <label>Name:</label>
-                    <input type="text" placeholder="Name" name="name" value={customerData.name} onChange={(e) => changeData(e)} required />
-                    <span className="validation">{inputValidation.nameErr}</span>
-                    <label>Email-Id:</label>
-                    <input type="email" placeholder="Email" name="email" value={customerData.email} onChange={(e) => changeData(e)} />
-                    <span className="validation">{inputValidation.emailErr}</span>
-                    <label>Moblie number:</label>
-                    <input type="text" placeholder="Moblie No." name="moblieNumber" value={customerData.moblieNumber} onChange={(e) => changeData(e)} />
-                    <span className="validation">{inputValidation.moblieNumberErr}</span>
+                    <div className="field-container">
+                        <input type="text" placeholder="&nbsp;" id="name-select" className="field-container-input" name="name" value={customerData.name} onChange={(e) => changeData(e)} required />
+                        <label className="field-container-label" htmlFor="name-select">Name:</label>
+                        <span className="validation">{inputValidation.nameErr}</span>
+                    </div>
+                    <div className="field-container">
+                        <input type="email" placeholder="&nbsp;" id="email-select" className="field-container-input" name="email" value={customerData.email} onChange={(e) => changeData(e)} />
+                        <label className="field-container-label" htmlFor="email-select">Email-Id:</label>
+                        <span className="validation">{inputValidation.emailErr}</span>
+                    </div>
+                    <div className="field-container">
+                        <input type="text" placeholder="&nbsp;" id="moblie-select" className="field-container-input" name="moblieNumber" value={customerData.moblieNumber} onChange={(e) => changeData(e)} />
+                        <label className="field-container-label" htmlFor="moblie-select">Moblie number:</label>
+                        <span className="validation">{inputValidation.moblieNumberErr}</span>
+                    </div>
                 </div>
-                <button type="submit">Next</button>
+                <div className="form-btns">
+                    <button type="button" onClick={()=>props.history.push("/add-cart-list")}>Cancel</button>
+                    <button className="next-btn" type="submit" disabled={disableBtn.nextBtn}>Next</button>
+                </div>
             </div>
         )
     }
@@ -100,16 +142,27 @@ const BuyProduct = ({ handleCustomerData, ...props }) => {
             <div className="form-first-page">
                 <h6 className="form-title">Address Details</h6>
                 <div className="purchaseform-person-field">
-                    <label>Address :</label>
-                    <input type="text" placeholder="Address" name="address" value={customerData.address} onChange={(e) => changeData(e)} />
-                    <label>State: </label>
-                    <input type="text" placeholder="State" name="state" value={customerData.state} onChange={(e) => changeData(e)} />
-                    <label>City: </label>
-                    <input type="text" placeholder="City" name="city" value={customerData.city} onChange={(e) => changeData(e)} />
-                    <label>Area:</label>
-                    <input type="text" placeholder="Area" name="area" value={customerData.area} onChange={(e) => changeData(e)} />
+                    <div className="field-container">
+                        <input type="text" placeholder="&nbsp;" id="address-select" className="field-container-input" name="address" value={customerData.address} onChange={(e) => changeData(e)} />
+                        <label className="field-container-label" htmlFor="address-select">Address :</label>
+                    </div>
+                    <div className="field-container">
+                        <input type="text" placeholder="&nbsp;" id="state-select" className="field-container-input"  name="state" value={customerData.state} onChange={(e) => changeData(e)} />
+                        <label className="field-container-label" htmlFor="state-select">State: </label>
+                    </div>
+                    <div className="field-container">
+                        <input type="text" placeholder="&nbsp;" id="city-select" className="field-container-input" name="city" value={customerData.city} onChange={(e) => changeData(e)} />
+                        <label className="field-container-label" htmlFor="city-select">City: </label>
+                    </div>
+                    <div className="field-container">
+                        <input type="text" placeholder="&nbsp;" id="area-select" className="field-container-input" name="area" value={customerData.area} onChange={(e) => changeData(e)} />
+                        <label className="field-container-label" htmlFor="area-select">Area:</label>
+                    </div>
                 </div>
-                <button className="dataSubmit" type="submit">Submit</button>
+                <div className="form-btns">
+                    <button type="button" onClick={()=>setToggleFormPage(false)} >Back</button>
+                    <button className="dataSubmit" type="submit" disabled={disableBtn.submitBtn}>Submit</button>
+                </div>
             </div>
         )
     }
@@ -141,7 +194,7 @@ const BuyProduct = ({ handleCustomerData, ...props }) => {
                                 <div><strong>Gmail:</strong><span>info@amazon.com</span></div>
                             </div>
                             <div className="address-information">
-                                <i class='fas fa-globe-asia'></i>
+                                <i className='fas fa-globe-asia'></i>
                                 <div><strong>Website:</strong><span>amazon.com</span></div>
                             </div>
                         </div>

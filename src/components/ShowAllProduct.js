@@ -11,7 +11,7 @@ const Product = ({ cards, showOneData, ...props }) => {
     useEffect(()=>{
         setTimeout(()=>{
             setIsLoading(false)
-        },2000)
+        },10000)
         console.log("=====================>",isLoading && cards===null)
         return(()=>setIsLoading(true))
     },[cards])
